@@ -9,11 +9,12 @@ import {
 
 import theme from '../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { getColor } from '../App';
 
 class CustomDrawer extends Component {
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.scrollView} style={styles.drawerBackground} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scrollView} style={[styles.drawerBackground, { backgroundColor: getColor() || theme.PRIMARY_COLOR }]} showsVerticalScrollIndicator={false}>
         <View style={styles.headerDrawer}>
           <View style={styles.topSpacer} />
           <Icon name={'ios-finger-print'} color={theme.TEXT_COLOR_INVERT} size={80} />

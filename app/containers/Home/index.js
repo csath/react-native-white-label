@@ -11,6 +11,7 @@ import {
 import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerActions } from 'react-navigation-drawer';
+import { setColor } from '../../App';
 
 function Item({ title }) {
     return (
@@ -51,14 +52,7 @@ const DATA = [
 
 export default class Home extends React.Component {
     static navigationOptions = ({ navigation }) => ({
-        title: 'Welcome',
-        headerStyle: {
-            backgroundColor: theme.PRIMARY_COLOR,
-        },
-        headerLeft: <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}/>,
-        headerTintColor: theme.TEXT_COLOR_INVERT,
         header: null
-
     })
 
     state = {
@@ -81,13 +75,14 @@ export default class Home extends React.Component {
         const visibleSec = (info.viewableItems.find(i => i.isViewable));
         if (visibleSec && visibleSec.section && visibleSec.section.title && visibleSec.section.title.color) {
             this.setState({ menuColor: visibleSec.section.title.color});
+            setColor(visibleSec.section.title.color);
         }
     };
     
     render() {
         return(
             <SafeAreaView style={[styles.safeAreaView, { backgroundColor: this.state.menuColor }]}>
-                <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())}/>
+                <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer({ color: this.state.menuColor }))}/>
                  <SectionList
                     ref={this.ref}
                     sections={DATA}
