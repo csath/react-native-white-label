@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import CustomIcon from '../../components/CustomIcon';
 
 export default class Login extends React.Component {
     static navigationOptions = {
@@ -70,6 +71,8 @@ export default class Login extends React.Component {
                         <TouchableOpacity style={styles.loginButton} onPress={this.login}>
                             <Text style={styles.loginText}>Login</Text>
                         </TouchableOpacity>
+                        {/* <CustomIcon name={'ios-notifications-outline'} color={theme.TEXT_COLOR_INVERT} size={40} /> */}
+
                     </Animated.View>
                 </ScrollView>
             </SafeAreaView>

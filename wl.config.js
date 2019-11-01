@@ -14,6 +14,6 @@ const getMetroDefaultsForMask = (mask = '')  => {
 
 module.exports = {
     maskConfig: {
-        sourceExts: getMetroDefaultsForMask('mask').sourceExts,
+        sourceExts: getMetroDefaultsForMask('').sourceExts,
     }
 };
