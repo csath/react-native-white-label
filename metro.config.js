@@ -10,6 +10,7 @@ const wlConfigs = require('./wl.config');
 module.exports = {
   resolver: {
     sourceExts: wlConfigs.maskConfig.sourceExts,
+    extraNodeModules: { ['rn-white-label'] : __dirname + '/wl.config.lock.js' }
   },
   transformer: {
     getTransformOptions: async () => ({

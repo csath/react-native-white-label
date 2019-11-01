@@ -7,11 +7,13 @@ import {
     SectionList,
     SafeAreaView,
     Dimensions,
+    Alert
 } from 'react-native';
 import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerActions } from 'react-navigation-drawer';
 import { setColor } from '../../App';
+import configs from 'rn-white-label';
 
 function Item({ title }) {
     return (
@@ -83,6 +85,7 @@ export default class Home extends React.Component {
         return(
             <SafeAreaView style={[styles.safeAreaView, { backgroundColor: this.state.menuColor }]}>
                 <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer({ color: this.state.menuColor }))}/>
+                <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIconRight} onPress={() => Alert.alert("Yey!\nNow you can read Wl configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
                  <SectionList
                     ref={this.ref}
                     sections={DATA}
@@ -110,6 +113,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         position: 'absolute',
         top: 60,
+        zIndex: 999
+    },
+    drawerIconRight: {
+        marginHorizontal: 15,
+        position: 'absolute',
+        top: 60,
+        right: 0,
         zIndex: 999
     },
     safeAreaView: {
