@@ -5,7 +5,12 @@
  * @format
  */
 
+const wlConfigs = require('./wl.config');
+
 module.exports = {
+  resolver: {
+    sourceExts: wlConfigs.maskConfig.sourceExts,
+  },
   transformer: {
     getTransformOptions: async () => ({
       transform: {
