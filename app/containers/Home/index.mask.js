@@ -25,7 +25,7 @@ export default class Home extends React.Component {
         headerTitleStyle: {
              fontWeight: 'bold',
         },
-        headerLeft: <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => Alert.alert("Yey!\nNow you can read Wl configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
+        headerLeft: <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => Alert.alert("Yey!\nNow you can read WL configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
     })
 
     state = {

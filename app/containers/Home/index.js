@@ -85,7 +85,7 @@ export default class Home extends React.Component {
         return(
             <SafeAreaView style={[styles.safeAreaView, { backgroundColor: this.state.menuColor }]}>
                 <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer({ color: this.state.menuColor }))}/>
-                <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIconRight} onPress={() => Alert.alert("Yey!\nNow you can read Wl configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
+                <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIconRight} onPress={() => Alert.alert("Yey!\nNow you can read WL configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
                  <SectionList
                     ref={this.ref}
                     sections={DATA}
