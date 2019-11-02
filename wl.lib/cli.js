@@ -14,7 +14,6 @@ const init = async () => {
         try {
             wlConfigs = require('../wl-config.js');
             wlConfigLastEditedTime = fileReader.getFileUpdatedDate('./wl-config.js');
-            console.log(wlConfigLastEditedTime)
         }
         catch(e) {
             log(chalk.red(`No wl-config.js found!`));
@@ -40,7 +39,7 @@ const init = async () => {
             let _maskName = mask || wlConfigs.defaultMask || (wlConfigs.maskList.length > 0 ? wlConfigs.maskList[0].mask : '');
             log(chalk.yellow(`Restarting masking config generation for '${(_maskName || '').toUpperCase()}'...`));
 
-            await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime);
+            await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime.toISOString());
             log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'`));
         }
         // if previous configs found but have different masks
@@ -57,7 +56,7 @@ const init = async () => {
             });
 
             if (shouldOverride) {
-                await auditor.overrideWithNewConfigs(mask, wlConfigLastEditedTime);
+                await auditor.overrideWithNewConfigs(mask, wlConfigLastEditedTime.toISOString());
                 log(chalk.green(`Successfully rewired app masking configurations for '${(mask || '').toUpperCase()}'`));
             }
             else {
@@ -65,7 +64,7 @@ const init = async () => {
             }
         }
         // if previous configs found but lock doesn't sync with wl-config.js lastEdited time
-        else if (wlConfigLastEditedTime && (wlConfigLastEditedTime != exisitngConfigs.wlConfigLastEditedTime)) {
+        else if (wlConfigLastEditedTime && (wlConfigLastEditedTime.toISOString() != exisitngConfigs.wlConfigLastEditedTime)) {
             let _maskName = wlConfigs.defaultMask || (wlConfigs.maskList.length > 0 ? wlConfigs.maskList[0].mask : '');
             log(chalk.yellow(`wl-config.js has been updated and wl-config.lock doesn't synch with wl-config.js`));
             log(chalk.cyan(`wl-config.lock config for mask : ${(exisitngConfigs.mask || '').toUpperCase()}`));
@@ -81,7 +80,7 @@ const init = async () => {
                 shouldDeleteLock = answers['shouldDeleteLock'];
             });
             if (shouldDeleteLock) {
-                await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime);
+                await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime.toISOString());
                 log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'!`));
             }
             else {

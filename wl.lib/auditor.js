@@ -14,7 +14,9 @@ const getMetroDefaultsForMask = (mask = '')  => {
         return ((f,xs) => xs.reduce((acc,x) => acc.concat(f(x)), []))(ext => [`${_mask}.${ext}`, ext], exts);
     }
     return ({
-        sourceExts: _getExtsForMask(mask, defaults.sourceExts),
+        resolver: {
+            sourceExts: _getExtsForMask(mask, defaults.sourceExts),
+        }
     })
 };
 

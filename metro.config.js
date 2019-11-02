@@ -6,7 +6,7 @@
  */
 
 const { mergeConfig } = require("metro-config");
-const wlConfigs = require('./wl.lib').metroConfig;
+const wlConfigs = require('./wl.lib/config').metroConfig;
 
 const defaultConfigs = {
   transformer: {

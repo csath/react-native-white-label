@@ -5,8 +5,8 @@ module.exports = {
     ...(existingConfigs || {}),
     metroConfig: {
         resolver: {
-            sourceExts: existingConfigs && existingConfigs.metroConfig && existingConfigs.metroConfig.sourceExts ? existingConfigs.metroConfig.sourceExts : defaults.sourceExts,
-            extraNodeModules: { ['react-native-white-label']: __dirname + '/wl.lib/config.js' }
+            sourceExts: existingConfigs && existingConfigs.metroConfig && existingConfigs.metroConfig.resolver.sourceExts ? existingConfigs.metroConfig.resolver.sourceExts : defaults.sourceExts,
+            extraNodeModules: { ['react-native-white-label']:  __dirname + '/../wl-config.lock.json' }
         },
     },
-}
+};
