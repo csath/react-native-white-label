@@ -5,13 +5,10 @@
  * @format
  */
 
-const wlConfigs = require('./wl.config');
+const { mergeConfig } = require("metro-config");
+const wlConfigs = require('./wl.lib').metroConfig;
 
-module.exports = {
-  resolver: {
-    sourceExts: wlConfigs.maskConfig.sourceExts,
-    extraNodeModules: { ['rn-white-label'] : __dirname + '/wl.config.lock.js' }
-  },
+const defaultConfigs = {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -21,3 +18,5 @@ module.exports = {
     }),
   },
 };
+
+module.exports = mergeConfig(defaultConfigs, wlConfigs);

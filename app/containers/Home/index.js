@@ -13,7 +13,7 @@ import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerActions } from 'react-navigation-drawer';
 import { setColor } from '../../App';
-import configs from 'rn-white-label';
+import configs from 'react-native-white-label';
 
 function Item({ title }) {
     return (

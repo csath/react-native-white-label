@@ -11,7 +11,7 @@ import {
 import theme from '../../styles/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerActions } from 'react-navigation-drawer';
-import configs from 'rn-white-label';
+import configs from 'react-native-white-label';
 
 export default class Home extends React.Component {
     static navigationOptions = ({ navigation }) => ({
