@@ -32,13 +32,15 @@ const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime) => {
         // save changes to wl-config.lock.json 
         await fileReader.writeLockFile({ 
             mask: mask,
-            metroConfig: configs,
+            version: '1.0.1',
+            lib: 'react-native-white-label',
             wlConfigLastEditedTime: wlConfigLastEditedTime,
-            lastUpdatedTimestamp: new Date().toISOString() 
+            lockedTime: new Date().toISOString(),
+            metroConfig: configs,
         });
     }
     catch(e) {
-        throw new Error(`App masking failed!`);
+        throw new Error(`App masking failed!`, e);
     }
 }
 

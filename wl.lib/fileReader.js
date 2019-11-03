@@ -5,7 +5,7 @@ const log = console.log;
 const writeLockFile = async (fileContent = {}, fileName = 'wl-config.lock.json') => {  
     log(chalk.yellow(`Generating ${fileName} ...`));
     return new Promise(function(resolve) { 
-        fs.writeJson(fileName, { ...fileContent }, { spaces: 0 }, err => {
+        fs.writeJson(fileName, { ...fileContent }, { spaces: 2 }, err => {
             if (err) {
                 log(chalk.red(`${fileName} update failed!`));
                 resolve(false);
