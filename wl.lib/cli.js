@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const fileReader = require('./fileReader');
 const auditor = require('./auditor');
 const assetHandler = require('./assetHandler');
+
 const log = console.log;
 
 const readWlConfigsFile = () => {
@@ -127,7 +128,7 @@ const init = async () => {
                 log(chalk.green(`Configured to use existing wl-config.lock`));
                 log(chalk.yellow(`Skipping masking config generation...`));
 
-                await assetHandler.moveAssets(exisitngLockConfigs.originalMaskConfig);
+                await assetHandler.moveAssets(exisitngLockConfigs.maskConfig, exisitngLockConfigs.lastKnownAssetStatString);
             }
         }
         // if previous configs found
@@ -135,7 +136,7 @@ const init = async () => {
             log(chalk.green(`Existing wl-config.lock found!`));
             log(chalk.yellow(`Skipping masking config generation...`));
 
-            await assetHandler.moveAssets(exisitngLockConfigs.originalMaskConfig);
+            await assetHandler.moveAssets(exisitngLockConfigs.maskConfig, exisitngLockConfigs.lastKnownAssetStatString);
         }
     }
     catch(e) {

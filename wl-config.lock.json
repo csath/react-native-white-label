@@ -2,8 +2,14 @@
   "mask": "sr",
   "version": "1.0.1",
   "lib": "react-native-white-label",
-  "wlConfigLastEditedTime": 1572698088020,
-  "lockedTime": 1572851639835,
+  "maskConfig": {
+    "mask": "sr",
+    "assetsDirIn": "./wl-assets",
+    "assetsDirOut": "./as",
+    "appName": "chanaka"
+  },
+  "wlConfigLastEditedTime": 1572859577116,
+  "lockedTime": 1572867705500,
   "metroConfig": {
     "resolver": {
       "sourceExts": [
@@ -17,5 +23,6 @@
         "tsx"
       ]
     }
-  }
+  },
+  "lastKnownAssetStatString": "[{\"dir\":\"wl-assets/a.js\",\"modifiedTime\":\"2019-11-04T09:43:23.144Z\"},{\"dir\":\"wl-assets/a.ue.js\",\"modifiedTime\":\"2019-11-04T10:09:01.463Z\"},{\"dir\":\"wl-assets/sssss.sjs.ksks.ksks.sksk.js\",\"modifiedTime\":\"2019-11-04T10:53:40.518Z\"},[{\"dir\":\"wl-assets/test/de.sr.js\",\"modifiedTime\":\"2019-11-04T12:26:50.619Z\"},{\"dir\":\"wl-assets/test/w.js\",\"modifiedTime\":\"2019-11-04T12:26:59.859Z\"}]]"
 }

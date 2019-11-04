@@ -19,14 +19,14 @@ module.exports = {
     maskList: [
         {
             mask: 'ue',
-            assetsDirIn: '',
-            assetsDirOut: '',
+            assetsDirIn: './wl-assets',
+            assetsDirOut: './as',
             appName: 'chanaka'
         },
         {
             mask: 'sr',
-            assetsDirIn: '',
-            assetsDirOut: '',
+            assetsDirIn: './wl-assets',
+            assetsDirOut: './as',
             appName: 'chanaka'
         },
     ]

@@ -1,11 +1,6 @@
 const fileReader = require('./fileReader');
-const chalk = require('chalk');
-const minimist = require('minimist');
 const defaults = require("metro-config/src/defaults/defaults");
-const inquirer = require('inquirer');
-  
-const log = console.log;
-
+const assetHandler = require('./assetHandler');
 
 const getMetroDefaultsForMask = (mask = '')  => {
     const _getExtsForMask = (_mask, exts = []) => {
@@ -21,28 +16,34 @@ const getMetroDefaultsForMask = (mask = '')  => {
 };
 
 const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
-    try {
-        // generate configs
-        const configs = getMetroDefaultsForMask(mask);
+    return new Promise(async function(reslove, reject) {
+        try {
+            // generate configs
+            const configs = getMetroDefaultsForMask(mask);
 
-        // move assets
-
-        // update native app connfigs
-
-        // save changes to wl-config.lock.json 
-        await fileReader.writeLockFile({ 
-            mask: mask,
-            version: '1.0.1',
-            lib: 'react-native-white-label',
-            originalMaskConfig: maskConfig,
-            wlConfigLastEditedTime: wlConfigLastEditedTime,
-            lockedTime: new Date().getTime(),
-            metroConfig: configs,
-        });
-    }
-    catch(e) {
-        throw new Error(`App masking failed!`, e);
-    }
+            // save changes to wl-config.lock.json 
+            await fileReader.writeLockFile({ 
+                mask: mask,
+                version: '1.0.1',
+                lib: 'react-native-white-label',
+                maskConfig: maskConfig,
+                wlConfigLastEditedTime: wlConfigLastEditedTime,
+                lockedTime: new Date().getTime(),
+                metroConfig: configs,
+            });
+    
+            // move assets
+            await assetHandler.moveAssets(maskConfig);
+    
+            // update native app connfigs
+            // need to do
+    
+            reslove();
+        }
+        catch(e) {
+            reject(e);
+        }
+    });
 }
 
 module.exports = {
