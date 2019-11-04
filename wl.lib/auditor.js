@@ -20,7 +20,7 @@ const getMetroDefaultsForMask = (mask = '')  => {
     })
 };
 
-const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime) => {
+const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
     try {
         // generate configs
         const configs = getMetroDefaultsForMask(mask);
@@ -34,8 +34,9 @@ const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime) => {
             mask: mask,
             version: '1.0.1',
             lib: 'react-native-white-label',
+            originalMaskConfig: maskConfig,
             wlConfigLastEditedTime: wlConfigLastEditedTime,
-            lockedTime: new Date().toISOString(),
+            lockedTime: new Date().getTime(),
             metroConfig: configs,
         });
     }

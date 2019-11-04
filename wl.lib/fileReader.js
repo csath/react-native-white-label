@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const path = require('path');
 const log = console.log;
 
 const writeLockFile = async (fileContent = {}, fileName = 'wl-config.lock.json') => {  
@@ -38,9 +39,25 @@ const getFileUpdatedDate = (path) => {
     return stats.mtime;
 }
 
+const getDirectoryStats = (dir = '') => {
+    return new Promise(function(resolve) {
+        const directoryTree = walkSync(dir);
+        resolve(directoryTree);
+    });  
+}
+
+const walkSync = (dir) => {
+    if (!fs.lstatSync(dir).isDirectory()) return ({ dir , modifiedTime: fs.statSync(dir).mtime });
+    return fs.readdirSync(dir).map(f => {
+        return walkSync(path.join(dir, f))
+    });
+}
+
 module.exports = {
     writeLockFile,
     readLockFile,
     getFileUpdatedDate,
     readFile,
+    getDirectoryStats,
+    walkSync,
 }

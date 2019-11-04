@@ -2,8 +2,8 @@
   "mask": "sr",
   "version": "1.0.1",
   "lib": "react-native-white-label",
-  "wlConfigLastEditedTime": "2019-11-02T12:34:48.020Z",
-  "lockedTime": "2019-11-03T05:48:11.002Z",
+  "wlConfigLastEditedTime": 1572698088020,
+  "lockedTime": 1572851639835,
   "metroConfig": {
     "resolver": {
       "sourceExts": [
