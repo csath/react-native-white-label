@@ -76,7 +76,7 @@ const _filterFilesFromFileExtention = (mask, src) => {
     if (!subExt) {
         return true;
     }
-    if ((subExt === mask) || (subExt === 'android') || (subExt === 'ios')) {
+    if ((subExt === mask) || (subExt === 'android') || (subExt === 'ios') || subExt.includes('/')) {
         return true;
     }
     return false;
