@@ -53,7 +53,7 @@ export default class Login extends React.Component {
             <SafeAreaView style={styles.parentContainer}>
                 <ScrollView contentContainerStyle={styles.container}>
                     <Animated.View style={[styles.container, { opacity }]}>
-                        <Image source={require('../../images/bike.gif')} backgroundColor={'transparent'} style={styles.logo}/>
+                        <Image source={require('../../images/bike.gif')} backgroundColor={'transparent'} style={styles.logo} resizeMode={'contain'}/>
                         <TouchableOpacity style={styles.loginButton} onPress={this.login}>
                             <Text style={styles.loginText}>Get started</Text>
                         </TouchableOpacity>
