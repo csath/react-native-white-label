@@ -86,7 +86,7 @@ const dirUnLinkHelper = (configs = [], currentConfig) => {
     return new Promise(async function(resolve) {
         const currentDestinations = (currentConfig.dirCopy || []).map(j => (j.destinationDri || ''));
         const flattenAllDestinations = configs.reduce((acc, i) => acc.concat((i.dirCopy || []).map(j => (j.destinationDri || ''))), []);
-        const filteredDestinations = flattenAllDestinations.filter(i => !currentDestinations.includes(i)).filter(j => filehandler.isDirectoryExsists(j));
+        const filteredDestinations = flattenAllDestinations.filter(i => !currentDestinations.find(k => k.startsWith(i))).filter(j => filehandler.isDirectoryExsists(j));
         
         const questions = filteredDestinations.map((i, index) => ({
             type: 'confirm',
