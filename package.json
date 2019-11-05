@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "node wl-config.js && react-native run-android",
-    "ios": "node wl.lib/cli.js  && react-native run-ios",
+    "ios": "node wl.lib/cli.js -m sr && react-native run-ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."

@@ -69,7 +69,7 @@ module.exports = {
                 // to copy ios app icons
                 {
                     sourceDri: './wl-assets/ios/appIcons/sr/AppIcon.appiconset',
-                    destinationDri: './ios/WhiteLabel/Images.xcassets',
+                    destinationDri: './ios/WhiteLabel/Images.xcassets/AppIcon.appiconset',
                     overwrite: true
                 }
             ]
