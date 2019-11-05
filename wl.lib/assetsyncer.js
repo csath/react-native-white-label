@@ -37,7 +37,6 @@ const moveAssets = async (maskConfigObj, lastKnownAssetStatString) => {
             await filehandler.updateLockFile('lastKnownAssetStatString', maskConfigObj.dirCopy ? JSON.stringify(maskConfigObj.dirCopy.map(i => filehandler.getDirectoryStats(i.sourceDri))) : '');
     
             log(chalk.green(`Assets sync success`));
-            log(chalk.green(`wl-config.lock.json updated successfully!`));
             return resolve();
         }
         catch (e) {
@@ -85,7 +84,6 @@ const _filterFilesFromFileExtention = (mask, src) => {
 
 const dirUnLinkHelper = (configs = [], currentConfig) => {
     return new Promise(async function(resolve) {
-        log(chalk.yellow(`\n`));
         const currentDestinations = (currentConfig.dirCopy || []).map(j => (j.destinationDri || ''));
         const flattenAllDestinations = configs.reduce((acc, i) => acc.concat((i.dirCopy || []).map(j => (j.destinationDri || ''))), []);
         const filteredDestinations = flattenAllDestinations.filter(i => !currentDestinations.includes(i)).filter(j => filehandler.isDirectoryExsists(j));

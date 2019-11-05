@@ -38,6 +38,30 @@ module.exports = {
                 },
                 // to copy android app icons
                 {
+                    sourceDri: './wl-assets/android/appIcons',
+                    destinationDri: './android/app/src/main/res',
+                    overwrite: false
+                },
+                // // to copy ios app icons
+                {
+                    sourceDri: './wl-assets/ios/appIcons/',
+                    destinationDri: './ios/WhiteLabel/Images.xcassets',
+                    overwrite: true
+                }
+            ]
+        },
+        {
+            mask: 'sr',
+            appName: 'chanaka',
+            dirCopy: [
+                // to copy images
+                {
+                    sourceDri: './wl-assets/images/',
+                    destinationDri: './app/images/',
+                    overwrite: true
+                },
+                // to copy android app icons
+                {
                     sourceDri: './wl-assets/andorid/appIcons',
                     destinationDri: './android/app/src/main/res',
                     overwrite: false
@@ -48,26 +72,6 @@ module.exports = {
                     destinationDri: './ios/WhiteLabel/Images.xcassets',
                     overwrite: true
                 }
-            ]
-        },
-        {
-            mask: 'sr',
-            appName: 'chanaka',
-            dirCopy: [
-                {
-                    sourceDri: './wl-assets',
-                    destinationDri: './abc',
-                    overwrite: true
-                },
-                {
-                    sourceDri: './wl-assets',
-                    destinationDri: './abcd',
-                    overwrite: false
-                },
-                {
-                    sourceDri: './wl-assets',
-                    destinationDri: './abcde',
-                },
             ]
         },
     ]

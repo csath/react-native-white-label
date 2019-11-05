@@ -60,12 +60,13 @@ const askQuestionToDeleteAndReplaceWlConfigs = async (_maskName = '') => {
             type: 'confirm',
             default: false,
             name: 'shouldDeleteLock',
-            message: chalk.magenta(`Do you want to remove wl-config.lock and restart masking config generation for '${(_maskName || '').toUpperCase()}'(press Y/YES)\nor use exsisting lock configs (press N/NO)?`),
+            message: chalk.magenta(`Do you want to remove wl-config.lock and restart masking config generation for '${(_maskName || '').toUpperCase()}'?`),
         }];
         let shouldDeleteLock = false;
         inquirer.prompt(questions)
         .then(answers => {
             shouldDeleteLock = answers['shouldDeleteLock'];
+            !shouldDeleteLock && chalk.yellow(`using existing remove wl-config.lock configs...`),
             resolve(shouldDeleteLock);
         })
         .catch(e => {
@@ -139,7 +140,7 @@ const init = async () => {
             let _maskName = wlConfigs.defaultMask || (wlConfigs.maskList.length > 0 ? wlConfigs.maskList[0].mask : '');
 
             log(chalk.yellow(`wl-config.js has been updated and wl-config.lock doesn't synch with wl-config.js`));
-            log(chalk.cyan(`wl-config.lock config for mask : ${(exisitngLockConfigs.mask || '').toUpperCase()}\nwl-config.js default mask      : ${(_maskName || '').toUpperCase()}`));
+            log(chalk.cyan(`Info:\n\twl-config.lock config for mask : ${(exisitngLockConfigs.mask || '').toUpperCase()}\n\twl-config.js default mask      : ${(_maskName || '').toUpperCase()}\n`));
 
             const shouldDeleteLock = await askQuestionToDeleteAndReplaceWlConfigs(_maskName);
 
