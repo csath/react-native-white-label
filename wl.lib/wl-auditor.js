@@ -1,6 +1,6 @@
-const fileReader = require('./fileReader');
+const fileHandler = require('./filehandler');
 const defaults = require("metro-config/src/defaults/defaults");
-const assetHandler = require('./assetHandler');
+const assetHandler = require('./assetsyncer');
 
 const getMetroDefaultsForMask = (mask = '')  => {
     const _getExtsForMask = (_mask, exts = []) => {
@@ -15,14 +15,14 @@ const getMetroDefaultsForMask = (mask = '')  => {
     })
 };
 
-const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
+const generateWlInternalConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
     return new Promise(async function(reslove, reject) {
         try {
             // generate configs
             const configs = getMetroDefaultsForMask(mask);
 
             // save changes to wl-config.lock.json 
-            await fileReader.writeLockFile({ 
+            await fileHandler.writeLockFile({ 
                 mask: mask,
                 version: '1.0.1',
                 lib: 'react-native-white-label',
@@ -48,5 +48,5 @@ const overrideWithNewConfigs = async (mask = '', wlConfigLastEditedTime, maskCon
 
 module.exports = {
     getMetroDefaultsForMask,
-    overrideWithNewConfigs,
+    generateWlInternalConfigs,
 }

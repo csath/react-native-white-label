@@ -1,9 +1,9 @@
 const chalk = require('chalk');
 const minimist = require('minimist');
 const inquirer = require('inquirer');
-const fileReader = require('./fileReader');
-const auditor = require('./auditor');
-const assetHandler = require('./assetHandler');
+const fileHandler = require('./filehandler');
+const auditor = require('./wl-auditor');
+const assetHandler = require('./assetsyncer');
 
 const log = console.log;
 
@@ -12,7 +12,7 @@ const readWlConfigsFile = () => {
     let wlConfigLastEditedTime = null;
     try {
         wlConfigs = require('../wl-config.js');
-        wlConfigLastEditedTime = fileReader.getFileUpdatedDate('./wl-config.js');
+        wlConfigLastEditedTime = fileHandler.getFileUpdatedDate('./wl-config.js');
     }
     catch(e) {
         log(chalk.red(`No wl-config.js found!`));
@@ -74,9 +74,28 @@ const askQuestionToDeleteAndReplaceWlConfigs = async (_maskName = '') => {
     });
 }
 
+const printLogo = () => {
+    log(chalk.cyan.bold(`\n##################################################`));
+    log(chalk.cyan.bold(`#####  ####################################  #####`));
+    log(chalk.cyan.bold(`######  #####      MASKING  CLI     ######  ######`));
+    log(chalk.cyan.bold(`#######  #####     ------------    ######  #######`));
+    log(chalk.cyan.bold(`########  ##############################  ########`));
+    log(chalk.cyan.bold(`##################################################`));
+}
+
+const printExitLogo = () => {
+    log(chalk.gray.bold(`\n##################################################`));
+    log(chalk.gray.bold(`###########  SHUTTING DOWN MASKING CLI  ##########`));
+    log(chalk.gray.bold(`##################################################\n`));
+}
+
 const init = async () => {
     try {
-        log(chalk.yellow(`Initializing app masking cli...`));
+        printLogo();
+        log(chalk.yellow(`\nInitializing masking cli...`));
+
+        let runningMask = '';
+        let shouldRunDirUnlink = false;
 
         // read wl-configs content
         let { wlConfigs, wlConfigLastEditedTime } = readWlConfigsFile();
@@ -85,16 +104,17 @@ const init = async () => {
         const mask = validateMaskArgsAgainstWlConfigs(wlConfigs);
         
         // get existing configs
-        const exisitngLockConfigs = await fileReader.readLockFile();
+        const exisitngLockConfigs = await fileHandler.readLockFile();
 
         // if no previous configs found
         if (!exisitngLockConfigs) {
             let _maskName = mask || wlConfigs.defaultMask || (wlConfigs.maskList.length > 0 ? wlConfigs.maskList[0].mask : '');
 
-            log(chalk.yellow(`No wl-config.lock found!`));
-            log(chalk.yellow(`Restarting masking config generation for '${(_maskName || '').toUpperCase()}'...`));
+            log(chalk.yellow(`No wl-config.lock found!\nRestarting masking config generation for '${(_maskName || '').toUpperCase()}'...`));
 
-            await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime.getTime(), (wlConfigs.maskList || []).find(i => i.mask === _maskName));
+            runningMask = (wlConfigs.maskList || []).find(i => i.mask === _maskName);
+            shouldRunDirUnlink = true;
+            await auditor.generateWlInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
 
             log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'`));
         }
@@ -103,11 +123,14 @@ const init = async () => {
             const shouldOverride = await askQuestionToOverrideWlConfigs(mask);
 
             if (shouldOverride) {
-                await auditor.overrideWithNewConfigs(mask, wlConfigLastEditedTime.getTime(), (wlConfigs.maskList || []).find(i => i.mask === mask));
+                runningMask = (wlConfigs.maskList || []).find(i => i.mask === mask);
+                shouldRunDirUnlink = true;
+                await auditor.generateWlInternalConfigs(mask, wlConfigLastEditedTime.getTime(), runningMask);
 
                 log(chalk.green(`Successfully rewired app masking configurations for '${(mask || '').toUpperCase()}'`));
             }
             else {
+                runningMask = exisitngLockConfigs.maskConfig;
                 log(chalk.yellow(`Masking config generation abort! Running with exsisting lock configs for ${exisitngLockConfigs.mask}`));
             }
         }
@@ -116,32 +139,41 @@ const init = async () => {
             let _maskName = wlConfigs.defaultMask || (wlConfigs.maskList.length > 0 ? wlConfigs.maskList[0].mask : '');
 
             log(chalk.yellow(`wl-config.js has been updated and wl-config.lock doesn't synch with wl-config.js`));
-            log(chalk.cyan(`wl-config.lock config for mask : ${(exisitngLockConfigs.mask || '').toUpperCase()}`));
-            log(chalk.cyan(`wl-config.js default mask      : ${(_maskName || '').toUpperCase()}`));
+            log(chalk.cyan(`wl-config.lock config for mask : ${(exisitngLockConfigs.mask || '').toUpperCase()}\nwl-config.js default mask      : ${(_maskName || '').toUpperCase()}`));
 
             const shouldDeleteLock = await askQuestionToDeleteAndReplaceWlConfigs(_maskName);
+
             if (shouldDeleteLock) {
-                await auditor.overrideWithNewConfigs(_maskName, wlConfigLastEditedTime.getTime(), (wlConfigs.maskList || []).find(i => i.mask === _maskName));
+                runningMask = (wlConfigs.maskList || []).find(i => i.mask === _maskName);
+                shouldRunDirUnlink = true;
+                await auditor.generateWlInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
+                
                 log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'!`));
             }
             else {
-                log(chalk.green(`Configured to use existing wl-config.lock`));
-                log(chalk.yellow(`Skipping masking config generation...`));
-
+                log(chalk.yellow(`Masking config generation abort! Running with exsisting lock configs for ${exisitngLockConfigs.mask}`));
+                
+                runningMask = exisitngLockConfigs.maskConfig;
                 await assetHandler.moveAssets(exisitngLockConfigs.maskConfig, exisitngLockConfigs.lastKnownAssetStatString);
             }
         }
         // if previous configs found
         else {
-            log(chalk.green(`Existing wl-config.lock found!`));
-            log(chalk.yellow(`Skipping masking config generation...`));
-
+            log(chalk.yellow(`Existing wl-config.lock found!\nSkipping masking config generation...`));
+            
+            runningMask = exisitngLockConfigs.maskConfig;
             await assetHandler.moveAssets(exisitngLockConfigs.maskConfig, exisitngLockConfigs.lastKnownAssetStatString);
         }
+        
+        wlConfigs.promptDirUnlink && shouldRunDirUnlink && await assetHandler.dirUnLinkHelper(wlConfigs.maskList, runningMask);
     }
     catch(e) {
-        log(chalk.red(`App masking failed!\n\n`), chalk.yellow('More information: \n', e, '\n\n'));
+        log(chalk.red(`App masking failed!\n`), chalk.yellow('More information: \n', e));
         process.kill(process.pid);
+    }
+    finally {
+        log(chalk.green(`wl-config.lock.json successfully updated!`));
+        printExitLogo();
     }
 }
 

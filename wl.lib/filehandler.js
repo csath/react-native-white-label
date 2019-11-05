@@ -1,17 +1,12 @@
 const fs = require('fs-extra');
-const chalk = require('chalk');
 const path = require('path');
-const log = console.log;
 
 const writeLockFile = async (fileContent = {}, fileName = 'wl-config.lock.json') => {  
-    log(chalk.yellow(`Generating ${fileName} ...`));
     return new Promise(function(resolve) { 
         fs.writeJson(fileName, { ...fileContent }, { spaces: 2 }, err => {
             if (err) {
-                log(chalk.red(`${fileName} update failed!`));
                 resolve(false);
             }
-            log(chalk.green(`${fileName} successfully updated!`));
             resolve(true);
         });
     })
@@ -103,6 +98,10 @@ const replaceFilesInDirWithMask = (dir, mask) => {
     });
 }
 
+const isDirectoryExsists = (dir) => {
+    return fs.existsSync(dir);
+}
+
 module.exports = {
     writeLockFile,
     readLockFile,
@@ -115,4 +114,5 @@ module.exports = {
     removeDirecotry,
     updateLockFile,
     replaceFilesInDirWithMask,
+    isDirectoryExsists,
 }
