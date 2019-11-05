@@ -1,42 +1,43 @@
 {
-  "mask": "sr",
+  "mask": "ue",
   "version": "1.0.1",
   "lib": "react-native-white-label",
   "maskConfig": {
-    "mask": "sr",
+    "mask": "ue",
     "appName": "chanaka",
     "dirCopy": [
       {
-        "sourceDri": "./wl-assets",
-        "destinationDri": "./abc",
+        "sourceDri": "./wl-assets/images",
+        "destinationDri": "./app/images",
         "overwrite": true
       },
       {
-        "sourceDri": "./wl-assets",
-        "destinationDri": "./abcd",
+        "sourceDri": "./wl-assets/android/appIcons",
+        "destinationDri": "./android/app/src/main/res",
         "overwrite": false
       },
       {
-        "sourceDri": "./wl-assets",
-        "destinationDri": "./abcde"
+        "sourceDri": "./wl-assets/ios/appIcons/ue/AppIcon.appiconset",
+        "destinationDri": "./ios/WhiteLabel/Images.xcassets/AppIcon.appiconset",
+        "overwrite": true
       }
     ]
   },
-  "wlConfigLastEditedTime": 1572936635972,
-  "lockedTime": 1572937976447,
+  "wlConfigLastEditedTime": 1572955979405,
+  "lockedTime": 1572955983927,
   "metroConfig": {
     "resolver": {
       "sourceExts": [
-        "sr.js",
+        "ue.js",
         "js",
-        "sr.json",
+        "ue.json",
         "json",
-        "sr.ts",
+        "ue.ts",
         "ts",
-        "sr.tsx",
+        "ue.tsx",
         "tsx"
       ]
     }
   },
-  "lastKnownAssetStatString": "[[{\"dir\":\"wl-assets/a.ue.js\",\"modifiedTime\":\"2019-11-04T10:09:01.463Z\"},{\"dir\":\"wl-assets/sssss.sjs.ksks.ksks.android.js\",\"modifiedTime\":\"2019-11-05T04:23:03.609Z\"},[{\"dir\":\"wl-assets/test/de.sr.js\",\"modifiedTime\":\"2019-11-04T12:26:50.619Z\"},{\"dir\":\"wl-assets/test/w.js\",\"modifiedTime\":\"2019-11-04T12:26:59.859Z\"}]],[{\"dir\":\"wl-assets/a.ue.js\",\"modifiedTime\":\"2019-11-04T10:09:01.463Z\"},{\"dir\":\"wl-assets/sssss.sjs.ksks.ksks.android.js\",\"modifiedTime\":\"2019-11-05T04:23:03.609Z\"},[{\"dir\":\"wl-assets/test/de.sr.js\",\"modifiedTime\":\"2019-11-04T12:26:50.619Z\"},{\"dir\":\"wl-assets/test/w.js\",\"modifiedTime\":\"2019-11-04T12:26:59.859Z\"}]],[{\"dir\":\"wl-assets/a.ue.js\",\"modifiedTime\":\"2019-11-04T10:09:01.463Z\"},{\"dir\":\"wl-assets/sssss.sjs.ksks.ksks.android.js\",\"modifiedTime\":\"2019-11-05T04:23:03.609Z\"},[{\"dir\":\"wl-assets/test/de.sr.js\",\"modifiedTime\":\"2019-11-04T12:26:50.619Z\"},{\"dir\":\"wl-assets/test/w.js\",\"modifiedTime\":\"2019-11-04T12:26:59.859Z\"}]]]"
+  "lastKnownAssetStatString": "[[{\"dir\":\"wl-assets/images/123.png\",\"modifiedTime\":\"2019-11-05T08:19:23.068Z\"},{\"dir\":\"wl-assets/images/bike.gif\",\"modifiedTime\":\"2019-11-05T08:19:23.069Z\"},{\"dir\":\"wl-assets/images/bike.sr.gif\",\"modifiedTime\":\"2019-11-05T08:19:23.097Z\"}],[[{\"dir\":\"wl-assets/android/appIcons/mipmap-hdpi/ic_launcher.png\",\"modifiedTime\":\"2019-11-05T12:08:01.776Z\"},{\"dir\":\"wl-assets/android/appIcons/mipmap-hdpi/ic_launcher.sr.png\",\"modifiedTime\":\"2019-11-05T12:07:01.972Z\"}],[{\"dir\":\"wl-assets/android/appIcons/mipmap-mdpi/ic_launcher.png\",\"modifiedTime\":\"2019-11-05T12:08:15.663Z\"},{\"dir\":\"wl-assets/android/appIcons/mipmap-mdpi/ic_launcher.sr.png\",\"modifiedTime\":\"2019-11-05T12:07:55.724Z\"}],[{\"dir\":\"wl-assets/android/appIcons/mipmap-xhdpi/ic_launcher.png\",\"modifiedTime\":\"2019-11-05T12:08:28.751Z\"},{\"dir\":\"wl-assets/android/appIcons/mipmap-xhdpi/ic_launcher.sr.png\",\"modifiedTime\":\"2019-11-05T12:07:49.856Z\"}],[{\"dir\":\"wl-assets/android/appIcons/mipmap-xxhdpi/ic_launcher.png\",\"modifiedTime\":\"2019-11-05T12:08:37.133Z\"},{\"dir\":\"wl-assets/android/appIcons/mipmap-xxhdpi/ic_launcher.sr.png\",\"modifiedTime\":\"2019-11-05T12:07:44.249Z\"}],[{\"dir\":\"wl-assets/android/appIcons/mipmap-xxxhdpi/ic_launcher.png\",\"modifiedTime\":\"2019-11-05T12:08:32.713Z\"},{\"dir\":\"wl-assets/android/appIcons/mipmap-xxxhdpi/ic_launcher.sr.png\",\"modifiedTime\":\"2019-11-05T12:07:17.310Z\"}]],[{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/.DS_Store\",\"modifiedTime\":\"2019-11-05T12:12:25.673Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/1024x1024.png\",\"modifiedTime\":\"2019-11-05T12:12:25.675Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Contents.json\",\"modifiedTime\":\"2019-11-05T12:12:25.676Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-20x20@2x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.677Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-20x20@3x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.677Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-29x29@2x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.678Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-29x29@3x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.679Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-40x40@2x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.679Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-40x40@3x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.680Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-60x60@2x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.680Z\"},{\"dir\":\"wl-assets/ios/appIcons/ue/AppIcon.appiconset/Icon-App-60x60@3x.png\",\"modifiedTime\":\"2019-11-05T12:12:25.681Z\"}]]"
 }

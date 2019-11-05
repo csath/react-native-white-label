@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* WhiteLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WhiteLabelTests.m */; };
 		0AC5E8F2C3C44347B4C12D13 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7159C4D05F3B4AF48E3E8A77 /* AntDesign.ttf */; };
@@ -28,6 +29,7 @@
 		7F1CA3262E7542F786B30791 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 823724F4DD3947969005B590 /* FontAwesome5_Regular.ttf */; };
 		9D1D5B5FBA8A4401A402B7F8 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A97DF43A4E84C37A884E4EC /* Fontisto.ttf */; };
 		A0C01E4B16586A49FCB96D8D /* libPods-WhiteLabel-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1898000885B79848C4BE77CA /* libPods-WhiteLabel-tvOSTests.a */; };
+		A30BA1ACDF3847C99AE6A634 /* ue-icon-pack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF423DD175C486C9DE8C849 /* ue-icon-pack.ttf */; };
 		A3818D9A98DE4EF998C553EB /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E9BA4A4360844F097BBCC2B /* Feather.ttf */; };
 		A94745AAF25C4358890BD39E /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E935FBF7EF04317A399238A /* MaterialIcons.ttf */; };
 		C22784E7E9BD40E09A99D4D9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB3B21FD3640BB94F4187C /* Octicons.ttf */; };
@@ -35,7 +37,6 @@
 		DAA1EE8C58AC48C3BE93A753 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9FBA764353A4CF3A30292B7 /* Foundation.ttf */; };
 		ED3D2B867DC125333E4772A1 /* libPods-WhiteLabelTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34202328E8865A9636421BC2 /* libPods-WhiteLabelTests.a */; };
 		FB2858374AF048FF8D55DB99 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B1793E48C5049F0A14F9798 /* FontAwesome5_Solid.ttf */; };
-		A30BA1ACDF3847C99AE6A634 /* ue-icon-pack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF423DD175C486C9DE8C849 /* ue-icon-pack.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,7 @@
 		00E356F21AD99517003FC87E /* WhiteLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteLabelTests.m; sourceTree = "<group>"; };
 		02E6294A711F2F9E77F403F5 /* Pods-WhiteLabel-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhiteLabel-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WhiteLabel-tvOSTests/Pods-WhiteLabel-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		09BA476B8B5B75302D60B4A1 /* libPods-WhiteLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhiteLabel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* WhiteLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhiteLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* WhiteLabelasdsad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhiteLabelasdsad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = WhiteLabel/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = WhiteLabel/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -99,7 +100,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F2E15EAD47A8480EA059CC7D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		FCF423DD175C486C9DE8C849 /* ue-icon-pack.ttf */ = {isa = PBXFileReference; name = "ue-icon-pack.ttf"; path = "../app/assets/fonts/ue-icon-pack.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FCF423DD175C486C9DE8C849 /* ue-icon-pack.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ue-icon-pack.ttf"; path = "../app/assets/fonts/ue-icon-pack.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +248,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* WhiteLabel.app */,
+				13B07F961A680F5B00A75B9A /* WhiteLabelasdsad.app */,
 				00E356EE1AD99517003FC87E /* WhiteLabelTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* WhiteLabel-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* WhiteLabel-tvOSTests.xctest */,
@@ -294,7 +295,7 @@
 			);
 			name = WhiteLabel;
 			productName = WhiteLabel;
-			productReference = 13B07F961A680F5B00A75B9A /* WhiteLabel.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* WhiteLabelasdsad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* WhiteLabel-tvOS */ = {
@@ -711,7 +712,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = chanaka.test.WhiteLabel;
-				PRODUCT_NAME = WhiteLabel;
+				PRODUCT_NAME = WhiteLabelasdsad;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -730,7 +731,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = chanaka.test.WhiteLabel;
-				PRODUCT_NAME = WhiteLabel;
+				PRODUCT_NAME = WhiteLabelasdsad;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

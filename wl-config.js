@@ -44,7 +44,7 @@ module.exports = {
                 },
                 // // to copy ios app icons
                 {
-                    sourceDri: './wl-assets/ios/appIcons/AppIcon.appiconset',
+                    sourceDri: './wl-assets/ios/appIcons/ue/AppIcon.appiconset',
                     destinationDri: './ios/WhiteLabel/Images.xcassets/AppIcon.appiconset',
                     overwrite: true
                 }
@@ -68,7 +68,7 @@ module.exports = {
                 },
                 // to copy ios app icons
                 {
-                    sourceDri: './wl-assets/ios/appIcons/AppIcon.appiconset',
+                    sourceDri: './wl-assets/ios/appIcons/sr/AppIcon.appiconset',
                     destinationDri: './ios/WhiteLabel/Images.xcassets',
                     overwrite: true
                 }
