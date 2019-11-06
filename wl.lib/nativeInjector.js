@@ -64,6 +64,28 @@ const resolveAndroidApplicationId = (newApplicationId = '') => {
             await fileHandler.writeFile(updatedManifestFile, manifestFilePath);
             log(chalk.green(`update application id in ${manifestFilePath} success!`));
 
+            // update MainActivity.java application id to new one
+            const mainActivityJavaPath = `./android/app/src/main/${existingApplicationId.replace(/\./g, '/')}/MainActivity.java`;
+            const mainActivityFile = await fileHandler.readFile(mainActivityJavaPath);
+            let updatedMainActivityFile = (mainActivityFile || '').replace(/package\s*(\S*);/, `package ${newApplicationId};`)
+            await fileHandler.writeFile(updatedMainActivityFile, mainActivityJavaPath);
+            log(chalk.green(`update application id in ${mainActivityJavaPath} success!`));
+
+
+            // update MainActivity.java application id to new one
+            const mainApplicationJavaPath = `./android/app/src/main/${existingApplicationId.replace(/\./g, '/')}/MainApplication.java`;
+            const mainApplicationFile = await fileHandler.readFile(mainApplicationJavaPath);
+            let updatedMainApplicationFile = (mainApplicationFile || '').replace(/package\s*(\S*);/, `package ${newApplicationId};`)
+            await fileHandler.writeFile(updatedMainApplicationFile, mainApplicationJavaPath);
+            log(chalk.green(`update application id in ${mainApplicationJavaPath} success!`));
+
+            // update BUCK application id to new one
+            const buckPath = `./android/app/BUCK`;
+            const buckFile = await fileHandler.readFile(buckPath);
+            let updatedBuckFile = (buckFile || '').replace(/package\s*=\s*"(\S*)"/g, `package = "${newApplicationId}"`)
+            await fileHandler.writeFile(updatedBuckFile, buckPath);
+            log(chalk.green(`update application id in ${buckPath} success!`));
+
              // update java package path to match with application id
             const javaBasePath = './android/app/src/main/java';
             const temFileCopyPath = `./android/app/src/main/java/temp-${new Date().getTime()}`;
