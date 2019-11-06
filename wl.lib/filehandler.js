@@ -29,6 +29,35 @@ const readFile = (fileName) => {
     });
 }
 
+const readJson = (fileName) => {
+    return new Promise(function(resolve) {
+        resolve(fs.readJSONSync(fileName));
+    });
+}
+
+const writeJson = async (fileContent = {}, fileName = '') => {  
+    return new Promise(function(resolve) { 
+        fs.writeJson(fileName, { ...fileContent }, { spaces: 2 }, err => {
+            if (err) {
+                resolve(false);
+            }
+            resolve(true);
+        });
+    })
+};
+
+const writeFile = async (fileContent, fileName = '') => {  
+    return new Promise(function(resolve) { 
+        fs.writeFile(fileName, fileContent, err => {
+            if (err) {
+                resolve(false);
+            }
+            resolve(true);
+        });
+    })
+};
+
+
 const getFileUpdatedDate = (path) => {
     const stats = fs.statSync(path)
     return stats.mtime;
@@ -115,4 +144,7 @@ module.exports = {
     updateLockFile,
     replaceFilesInDirWithMask,
     isDirectoryExsists,
+    readJson,
+    writeJson,
+    writeFile,
 }
