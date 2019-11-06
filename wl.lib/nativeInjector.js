@@ -1,72 +1,82 @@
 const fileHandler = require('./filehandler');
+const chalk = require('chalk');
 
-const changeAndroidDisplayName = (displayName = 'chanaka') => {
+const log = console.log;
+
+const changeAndroidDisplayName = (displayName = '') => {
     return new Promise(async function(resolve, reject) {
         try {
+            if (!displayName) {
+                reject('Display name cannot be null or empty')
+            }
+            log(chalk.yellow('Starting to change andorid app display name...'));
+
             // change app.json
             const appJson = await fileHandler.readJson(`./app.json`);
             fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
+            log(chalk.green('update successful! ./app.json'));
 
             // change ...res/values/strings.xml
             const xmlFilePath = `./android/app/src/main/res/values/strings.xml`;
             const file = await fileHandler.readFile(xmlFilePath);
             let updatedFile = (file || '').replace(`<string name="app_name">${appJson.displayName}</string>`, `<string name="app_name">${displayName}</string>`)
             await fileHandler.writeFile(updatedFile, xmlFilePath);
+            log(chalk.green('update successful! ./android/app/src/main/res/values/strings.xml'));
+
+            log(chalk.green('Android app display name update success!'));
             resolve();
         }
         catch (e) {
+            log(chalk.green('Android app display name update failed!'));
             reject(e);
         }
     });
 }
 
-const resolveBundleIdentifiers = (newApplicationId = 'com.id.cd') => {
+const resolveAndroidApplicationId = (newApplicationId = '') => {
     return new Promise(async function(resolve, reject) {
         try {
             if (!newApplicationId) {
-                reject("New Application Id cannot be null or empty");
+                reject('New Application Id cannot be null or empty');
             }
+            log(chalk.yellow('Starting to change andorid application ID...'));
 
             // read android buid.gradle and get existing application ID
             const buildGradleFilePath = `./android/app/build.gradle`;
 
             const buildGralde = await fileHandler.readFile(buildGradleFilePath);
             const existingApplicationId = (/applicationId\s"(\S*)"/.exec(buildGralde || '') && (/applicationId\s"(\S*)"/.exec(buildGralde || '')[1]));
+            log(chalk.yellow(`Found exsisting application id: ${existingApplicationId}`));
             
             if (!existingApplicationId) {
-                reject("Couldn't find exisitng Application Id");
+                reject(`Couldn't find exisitng Application Id`);
             }
 
             // update build.gradle application id to new one
             let updatedBuildGradle = (buildGralde || '').replace(/applicationId\s"(\S*)"/, `applicationId "${newApplicationId}"`);
             await fileHandler.writeFile(updatedBuildGradle, buildGradleFilePath);
+            log(chalk.green(`update application id in ${buildGradleFilePath} success!`));
 
             // update AndroidManifest.xml application id to new one
             const manifestFilePath = `./android/app/src/main/AndroidManifest.xml`;
             const manifestFile = await fileHandler.readFile(manifestFilePath);
             let updatedManifestFile = (manifestFile || '').replace(/package=\s*"(\S*)"/, `package="${newApplicationId}"`)
             await fileHandler.writeFile(updatedManifestFile, manifestFilePath);
+            log(chalk.green(`update application id in ${manifestFilePath} success!`));
 
-            console.log(existingApplicationId)
-
+             // update java package path to match with application id
             const javaBasePath = './android/app/src/main/java';
             const temFileCopyPath = `./android/app/src/main/java/temp-${new Date().getTime()}`;
             const newPackagePath = `${javaBasePath}/${newApplicationId.replace(/\./g, '/')}`;
             const existingPackagePath = `${javaBasePath}/${existingApplicationId.replace(/\./g, '/')}`;
-            console.log(newPackagePath)
-            console.log(existingPackagePath)
-            console.log('>>>>>>>>>>>>>>>>>', `./android/app/src/main/java/${existingPackagePath.split('.')[0]}/`)
+
             await fileHandler.copyDirectory(existingPackagePath, temFileCopyPath);
-            await fileHandler.removeDirecotry(`./android/app/src/main/java/${existingPackagePath.split('.')[0]}/`)
-            // await fileHandler.copyDirectory(temFileCopyPath, newPackagePath);
+            await fileHandler.removeDirecotry(`./android/app/src/main/java/${existingApplicationId.split('.')[0]}`)
+            await fileHandler.copyDirectory(temFileCopyPath, newPackagePath);
+            await fileHandler.removeDirecotry(temFileCopyPath);
+            log(chalk.green(`update android application package path to ${newPackagePath} success!`));
 
-            // fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
-
-            // // change ...res/values/strings.xml
-            // const xmlFilePath = `${androidDir}/app/src/main/res/values/strings.xml`;
-            // let file = await fileHandler.readFile(xmlFilePath);
-            // let b = (file || '').replace(`<string name="app_name">${appJson.displayName}</string>`, `<string name="app_name">${displayName}</string>`)
-            // await fileHandler.writeFile(b, xmlFilePath);
+            log(chalk.green(`Andorid application ID update successful!`));
             resolve();
         }
         catch (e) {
@@ -75,8 +85,7 @@ const resolveBundleIdentifiers = (newApplicationId = 'com.id.cd') => {
     });
 }
 
-resolveBundleIdentifiers()
 module.exports = {
     changeAndroidDisplayName,
-    resolveBundleIdentifiers,
+    resolveAndroidApplicationId,
 }
