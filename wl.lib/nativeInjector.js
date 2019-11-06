@@ -34,7 +34,7 @@ const changeAndroidDisplayName = (displayName = '') => {
     });
 }
 
-const resolveAndroidApplicationId = (newApplicationId = 'csa.csa.csa.csa.csa.csa.csa') => {
+const resolveAndroidApplicationId = (newApplicationId = '') => {
     return new Promise(async function(resolve, reject) {
         try {
             if (!newApplicationId) {
@@ -54,6 +54,11 @@ const resolveAndroidApplicationId = (newApplicationId = 'csa.csa.csa.csa.csa.csa
             if (!existingApplicationId) {
                 log(chalk.red(`Couldn't find exisitng Application Id, Aborting...`));                
                 return reject(`Couldn't find exisitng Application Id`);
+            }
+
+            if (existingApplicationId === newApplicationId) {
+                log(chalk.cyan.bold(`New and existing application Ids looks same. Skipping application ID resolver process...`));                
+                return resolve(`changes skipped`);
             }
 
             // update build.gradle application id to new one
