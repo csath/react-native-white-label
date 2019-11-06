@@ -55,9 +55,10 @@ const resolveBundleIdentifiers = (newApplicationId = 'com.id.cd') => {
             const existingPackagePath = `${javaBasePath}/${existingApplicationId.replace(/\./g, '/')}`;
             console.log(newPackagePath)
             console.log(existingPackagePath)
+            console.log('>>>>>>>>>>>>>>>>>', `./android/app/src/main/java/${existingPackagePath.split('.')[0]}/`)
             await fileHandler.copyDirectory(existingPackagePath, temFileCopyPath);
-            // await fileHandler.removeDirecotry(`./android/app/src/main/java/${existingPackagePath.split('.')[0]}`)
-            await fileHandler.copyDirectory(temFileCopyPath, newPackagePath);
+            await fileHandler.removeDirecotry(`./android/app/src/main/java/${existingPackagePath.split('.')[0]}/`)
+            // await fileHandler.copyDirectory(temFileCopyPath, newPackagePath);
 
             // fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
 
