@@ -115,7 +115,7 @@ const init = async () => {
 
             runningMask = (wlConfigs.maskList || []).find(i => i.mask === _maskName);
             shouldRunDirUnlink = true;
-            await auditor.generateWlInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
+            await auditor.generateMaskingInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
 
             log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'`));
         }
@@ -126,7 +126,7 @@ const init = async () => {
             if (shouldOverride) {
                 runningMask = (wlConfigs.maskList || []).find(i => i.mask === mask);
                 shouldRunDirUnlink = true;
-                await auditor.generateWlInternalConfigs(mask, wlConfigLastEditedTime.getTime(), runningMask);
+                await auditor.generateMaskingInternalConfigs(mask, wlConfigLastEditedTime.getTime(), runningMask);
 
                 log(chalk.green(`Successfully rewired app masking configurations for '${(mask || '').toUpperCase()}'`));
             }
@@ -147,7 +147,7 @@ const init = async () => {
             if (shouldDeleteLock) {
                 runningMask = (wlConfigs.maskList || []).find(i => i.mask === _maskName);
                 shouldRunDirUnlink = true;
-                await auditor.generateWlInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
+                await auditor.generateMaskingInternalConfigs(_maskName, wlConfigLastEditedTime.getTime(), runningMask);
                 
                 log(chalk.green(`Successfully rewired app masking configurations for '${(_maskName || '').toUpperCase()}'!`));
             }
