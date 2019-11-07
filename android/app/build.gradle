@@ -181,18 +181,9 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
-    compile 'com.facebook.fresco:animated-base-support:0.11.0'
-
-    // For animated GIF support
-    compile 'com.facebook.fresco:animated-gif:0.11.0'
-
-    // For WebP support, including animated WebP
-    compile 'com.facebook.fresco:animated-webp:0.11.0'
-    compile 'com.facebook.fresco:webpsupport:0.11.0'
-
-    // For WebP support, without animations
-    compile 'com.facebook.fresco:webpsupport:0.11.0'
+    
+    implementation 'com.facebook.fresco:fresco:2.0.0'
+    implementation 'com.facebook.fresco:animated-gif:2.0.0'
     
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
