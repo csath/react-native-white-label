@@ -45,6 +45,9 @@ export default class Home extends React.Component {
                     <TouchableOpacity onPress={() => alert('Ohh, you need to take a Train?')}  style={styles.button}>
                         <Text style={styles.headerText}>Train</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailView')}  style={styles.button}>
+                        <Text style={styles.headerText}>Go to details view</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </SafeAreaView>
         );

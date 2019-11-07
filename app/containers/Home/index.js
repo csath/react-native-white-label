@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
-    ScrollView,
+    TouchableOpacity,
     StyleSheet,
     SectionList,
     SafeAreaView,
@@ -86,6 +86,7 @@ export default class Home extends React.Component {
             <SafeAreaView style={[styles.safeAreaView, { backgroundColor: this.state.menuColor }]}>
                 <Icon name={'ios-menu'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIcon} onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer({ color: this.state.menuColor }))}/>
                 <Icon name={'ios-information-circle-outline'} color={theme.TEXT_COLOR_INVERT} size={28} style={styles.drawerIconRight} onPress={() => Alert.alert("Yey!\nNow you can read WL configs just using \n`import configs from 'rn-white-label'`\n inside JS env\n", JSON.stringify(configs, '', 4))}/>
+                
                  <SectionList
                     ref={this.ref}
                     sections={DATA}
@@ -98,6 +99,9 @@ export default class Home extends React.Component {
                         </View>
                     )}
                     onViewableItemsChanged={this._onViewableItemsChanged}
+                    ListFooterComponent={()=> (<TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('DetailView')}>
+                    <Text>Go to details view</Text>
+                    </TouchableOpacity>)}
                 />
             </SafeAreaView>
         );
@@ -153,6 +157,15 @@ const styles = StyleSheet.create({
         height: 200,
         width: 150,
         margin: 15,
+    },
+    button: {
+        alignSelf: 'center',
+        backgroundColor: theme.TEXT_COLOR_INVERT,
+        padding: 10,
+        paddingHorizontal: 15,
+        borderRadius: 4,
+        flex: 1,
+        marginVertical: 30
     }
 });
 
