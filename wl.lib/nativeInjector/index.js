@@ -4,6 +4,7 @@ const androidApplicationIdModule = require('./android/applicationId');
 const androidDisplayNameModule = require('./android/displayName');
 const iosBundleIdentifierModule = require('./ios/bundleIdentifier');
 const iosDisplayNameModule = require('./ios/displayName');
+const { execSync } = require('child_process');
 
 const log = console.log;
 
@@ -28,6 +29,15 @@ const init = ({ androidApplicationId, iosBundleIdentifier, displayName, skip }) 
                 fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
                 log(chalk.cyan('update ./app.json successful!'));
             }
+
+            if (process.platform != 'win32') {
+                execSync('cd ios && pod install');
+                execSync('cd android && ./gradlew clean');
+            }
+            else {
+                execSync('cd android && ./gradlew clean');
+            }
+    
             return resolve();
         }
         catch (e) {

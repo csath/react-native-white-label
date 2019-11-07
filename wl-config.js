@@ -9,7 +9,6 @@ CONFIG OBJECT STRUCTURE
         maskList: ARRAY [
             OBJECT {
                 mask: STRING, >>>> (is used as the js file extension; *should be lowercase)
-                appName: STRING, >>>> (application name)
                 nativeConfig: OBJECT {
                     skip: BOOLEAN, >>>> (set true to enable run native configuration updates)
                     androidApplicationId: STRING, (android applicationId)
@@ -34,7 +33,6 @@ module.exports = {
     maskList: [
         {
             mask: 'ue',
-            appName: 'chanaka',
             nativeConfig: {
                 skip: false,
                 androidApplicationId: 'no.unieconomy.unieconomymobile',
@@ -64,7 +62,6 @@ module.exports = {
         },
         {
             mask: 'sr',
-            appName: 'chanaka',
             nativeConfig: {
                 skip: false,
                 androidApplicationId: 'no.unimicro.sparebank1.srbank.regnskap',
