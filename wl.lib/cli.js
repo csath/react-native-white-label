@@ -2,8 +2,8 @@ const chalk = require('chalk');
 const minimist = require('minimist');
 const inquirer = require('inquirer');
 const fileHandler = require('./filehandler');
-const auditor = require('./wl-auditor');
-const assetHandler = require('./assetsyncer');
+const auditor = require('./auditor');
+const assetHandler = require('./assetsHandler');
 
 const log = console.log;
 

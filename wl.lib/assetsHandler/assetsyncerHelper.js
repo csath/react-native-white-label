@@ -1,5 +1,5 @@
 
-const filehandler = require('./filehandler');
+const filehandler = require('../fileHandler');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 

@@ -1,6 +1,7 @@
-const fileHandler = require('./filehandler');
+const fileHandler = require('../fileHandler');
 const defaults = require("metro-config/src/defaults/defaults");
-const assetHandler = require('./assetsyncer');
+const assetHandler = require('../assetsHandler');
+const nativeInjector = require('../nativeInjector');
 
 const getMetroDefaultsForMask = (mask = '')  => {
     const _getExtsForMask = (_mask, exts = []) => {
@@ -15,7 +16,7 @@ const getMetroDefaultsForMask = (mask = '')  => {
     })
 };
 
-const generateWlInternalConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
+const generateMaskingInternalConfigs = async (mask = '', wlConfigLastEditedTime, maskConfig) => {
     return new Promise(async function(reslove, reject) {
         try {
             // generate configs
@@ -36,7 +37,7 @@ const generateWlInternalConfigs = async (mask = '', wlConfigLastEditedTime, mask
             await assetHandler.moveAssets(maskConfig);
     
             // update native app connfigs
-            // need to do
+            await nativeInjector.init(maskConfig.nativeConfig || {});
     
             reslove();
         }
@@ -48,5 +49,5 @@ const generateWlInternalConfigs = async (mask = '', wlConfigLastEditedTime, mask
 
 module.exports = {
     getMetroDefaultsForMask,
-    generateWlInternalConfigs,
+    generateMaskingInternalConfigs,
 }

@@ -1,109 +1,7 @@
-const fileHandler = require('./filehandler');
+const fileHandler = require('../../filehandler');
 const chalk = require('chalk');
 
 const log = console.log;
-
-const changeAndroidDisplayName = (displayName = '') => {
-    return new Promise(async function(resolve, reject) {
-        try {
-            if (!displayName) {
-                log(chalk.red('Display name cannot be null or empty, Aborting...'));
-                return reject('Display name cannot be null or empty')
-            }
-            log(chalk.yellow('Starting to change andorid app display name...'));
-
-            // change app.json
-            const appJson = await fileHandler.readJson(`./app.json`);
-            fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
-            log(chalk.green('update ./app.json successful!'));
-
-            // change ...res/values/strings.xml
-            const xmlFilePath = `./android/app/src/main/res/values/strings.xml`;
-            const file = await fileHandler.readFile(xmlFilePath);
-            let updatedFile = (file || '').replace(`<string name="app_name">${appJson.displayName}</string>`, `<string name="app_name">${displayName}</string>`)
-            await fileHandler.writeFile(updatedFile, xmlFilePath);
-            log(chalk.green('update ./android/app/src/main/res/values/strings.xml successful!'));
-
-            log(chalk.green('Android app display name update success!'));
-            return resolve();
-        }
-        catch (e) {
-            log(chalk.red('Android app display name update failed!'));
-            return reject(e);
-        }
-    });
-}
-
-const changeIosDisplayName = (displayName = 'SUOE') => {
-    return new Promise(async function(resolve, reject) {
-        try {
-            if (!displayName) {
-                log(chalk.red('Display name cannot be null or empty, Aborting...'));
-                return reject('Display name cannot be null or empty')
-            }
-            log(chalk.yellow('Starting to change ios app display name...'));
-
-            // read app name from app.json
-            const appJson = await fileHandler.readJson(`./app.json`);
-            fileHandler.writeJson({ ...appJson, displayName}, `./app.json`);
-            log(chalk.cyan('update ./app.json successful!'));
-
-            // change .xcodeproj
-            const xcodeprojPath = `./ios/${appJson.name}.xcodeproj/project.pbxproj`;
-            const file = await fileHandler.readFile(xcodeprojPath);
-            let updatedFile1 = (file || '').replace(new RegExp(`PRODUCT_NAME = ${appJson.displayName}`, 'g'), `PRODUCT_NAME = ${displayName}`)
-            let updatedFile2 = (updatedFile1 || '').replace(new RegExp(` ${appJson.displayName}.app `, 'g'), ` ${displayName}.app `)
-            let updatedFile3 = (updatedFile2 || '').replace(new RegExp(`/${appJson.displayName}.app/${appJson.displayName}`, 'g'), `/${displayName}.app/${displayName}`)
-            let updatedFile4 = (updatedFile3 || '').replace(new RegExp(`path = ${appJson.displayName}.app;`), `path = ${displayName}.app;`)
-            await fileHandler.writeFile(updatedFile4, xcodeprojPath);
-            log(chalk.cyan('update project.pbxproj successful!'));
-
-            // change .xcscheme
-            const xcschemePath = `./ios/${appJson.name}.xcodeproj/xcshareddata/xcschemes/${appJson.name}.xcscheme`;
-            const xcschemeFile = await fileHandler.readFile(xcschemePath);
-            let updatedFile = (xcschemeFile || '').replace(new RegExp(`${appJson.displayName}.app`, 'g'), `${displayName}.app`)
-            await fileHandler.writeFile(updatedFile, xcschemePath);
-            log(chalk.cyan('update .xcscheme successful!'));
-
-            log(chalk.green('IOS app display name update success!'));
-            return resolve();
-        }
-        catch (e) {
-            log(chalk.red('IOS app display name update failed!'));
-            return reject(e);
-        }
-    });
-}
-
-const resolveIOSApplicationId = (newApplicationId = '') => {
-    return new Promise(async function(resolve, reject) {
-        try {
-            if (!newApplicationId) {
-                log(chalk.red('New Bundle Id cannot be null or empty, Aborting...'));
-                return reject('New Bundle Id cannot be null or empty');
-            }
-            log(chalk.yellow('Starting to change ios bundle Identifier...'));
-            log(chalk.yellow(`Found new bundle id: ${chalk.magenta(newApplicationId)}`));
-
-            // read app name from app.json
-            const appJson = await fileHandler.readJson(`./app.json`);
-
-            // change .xcodeproj
-            const xcodeprojPath = `./ios/${appJson.name}.xcodeproj/project.pbxproj`;
-            const file = await fileHandler.readFile(xcodeprojPath);
-            let updatedFile = (file || '').replace(/PRODUCT_BUNDLE_IDENTIFIER = ([^"]\S*);/g, `PRODUCT_BUNDLE_IDENTIFIER = ${newApplicationId};`)
-            await fileHandler.writeFile(updatedFile, xcodeprojPath);
-            log(chalk.cyan('update project.pbxproj successful!'));
-
-            log(chalk.green('IOS app bundle identifier update success!'));
-            return resolve();
-        }
-        catch (e) {
-            log(chalk.red('IOS app bundle identifier update failed!'));
-            return reject(e);
-        }
-    });
-}
 
 const resolveAndroidApplicationId = (newApplicationId = '') => {
     return new Promise(async function(resolve, reject) {
@@ -186,10 +84,7 @@ const resolveAndroidApplicationId = (newApplicationId = '') => {
         }
     });
 }
-resolveIOSApplicationId()
+
 module.exports = {
-    changeAndroidDisplayName,
     resolveAndroidApplicationId,
-    changeIosDisplayName,
-    resolveIOSApplicationId,
 }
