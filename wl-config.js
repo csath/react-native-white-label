@@ -10,6 +10,12 @@ CONFIG OBJECT STRUCTURE
             OBJECT {
                 mask: STRING, >>>> (is used as the js file extension; *should be lowercase)
                 appName: STRING, >>>> (application name)
+                nativeConfig: OBJECT {
+                    skip: BOOLEAN, >>>> (set true to enable run native configuration updates)
+                    androidApplicationId: STRING, (android applicationId)
+                    iosBundleIdentifier: STRING, (ios bundleIdentifier)
+                    displayName: STRING, (application display name)
+                },
                 dirCopy: ARRAY [
                     {
                         sourceDri: STRING, >>>> (exisitng directory path of the folder or file relative to project root folder)
@@ -29,6 +35,12 @@ module.exports = {
         {
             mask: 'ue',
             appName: 'chanaka',
+            nativeConfig: {
+                skip: false,
+                androidApplicationId: 'no.unieconomy.unieconomymobile',
+                iosBundleIdentifier: 'no.unieconomy.UniEconomy.Dev',
+                displayName: 'UniEconomy',  
+            },
             dirCopy: [
                 // to copy images
                 {
@@ -53,6 +65,12 @@ module.exports = {
         {
             mask: 'sr',
             appName: 'chanaka',
+            nativeConfig: {
+                skip: false,
+                androidApplicationId: 'no.unimicro.sparebank1.srbank.regnskap',
+                iosBundleIdentifier: 'no.unimicro.sparebank1.srbank.regnskap',
+                displayName: 'Regnskap',  
+            },
             dirCopy: [
                 // to copy images
                 {

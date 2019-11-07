@@ -7,7 +7,7 @@ const iosDisplayNameModule = require('./ios/displayName');
 
 const log = console.log;
 
-const init = ({ androidApplicationId, iosBundleIdentifier, displayName, skip}) => {
+const init = ({ androidApplicationId, iosBundleIdentifier, displayName, skip }) => {
     return new Promise(async function(resolve, reject) {
         try {
             if (skip) {
