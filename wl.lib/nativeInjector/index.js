@@ -30,13 +30,23 @@ const init = ({ androidApplicationId, iosBundleIdentifier, displayName, skip }) 
                 log(chalk.cyan('update ./app.json successful!'));
             }
 
-            if (process.platform != 'win32') {
-                execSync('cd ios && pod install');
-                execSync('cd android && ./gradlew clean');
+            try {
+                log(chalk.yellow('Updating ios pods and cleaning andorid gradle builds...'));
+
+                if (process.platform != 'win32') {
+                    execSync('cd ios && pod install');
+                    execSync('cd android && ./gradlew clean');
+                }
+                else {
+                    execSync('cd android && ./gradlew clean');
+                }
+                log(chalk.green('Updating ios pods and cleaning andorid gradle builds success!'));
+
             }
-            else {
-                execSync('cd android && ./gradlew clean');
+            catch(e) {
+                log(chalk.green('Updating ios pods and cleaning andorid gradle builds silently failed!'));
             }
+           
     
             return resolve();
         }
